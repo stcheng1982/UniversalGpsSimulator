@@ -1,0 +1,53 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS Maps SDK for JavaScript Tutorials: Add a point, line, and polygon</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
+  <link rel="stylesheet" href="index.css" />
+  <script src="Namespacing.js"></script>
+  <script src="pubsub.js"></script>
+  <script src="knockout-min.js"></script>
+  <script src="https://js.arcgis.com/4.28/"></script>
+
+  <script src="WindowsHostDeviceProxy.js"></script>
+  <script src="index.js"></script>
+</head>
+<body>
+  <div class="pageRoot">
+    <div class="header">
+      <p>
+        <b>Lon: </b><span data-bind="text:obLongitude().toFixed(6)"></span>
+        <b>Lat: </b><span data-bind="text:obLatitude().toFixed(6)"></span>
+        <b>Speed: </b><span data-bind="text:obSpeed()"></span>
+        <b>Distance: </b><span data-bind="text:obDistanceToPrevPoint()"></span>
+        <b>Bearing: </b><span data-bind="text:obBearingFromPrevPoint()"></span>
+        <b>Sent:</b><span data-bind="text:obSentOn().toLocaleTimeString()"></span>
+      </p>
+
+      <!--<p>
+          <b>Speech:</b>[<span data-bind="text:obSpeechResultType"></span>] <span data-bind="text:obSpeechResultText"></span>
+      </p>-->
+    </div>
+    <div class="content">
+      <div class="map-toolbar">
+        <div id="btnToggleBasemapGallery" class="btn-action toggle-basemapgallery"
+          title="Show/Hide Basemap Gallery"
+          data-bind="click:toggleBasemapGallery"></div>
+        <div id="btnFocusOnCurrentLocationOfDevice" class="btn-action focus-on-single"
+          title="Focus on current location of device"
+          data-bind="click:focusToCurrentLocationOfSelectedDevice"></div>
+        <div id="btnFocusOnPlaybackPointsOfDevice" class="btn-action focus-on-all"
+          title="Focus on playback locations of device"
+          data-bind="click:focusToAllPlaybackPointsOfSelectedDevice"></div>
+      </div>
+
+      <div id="basemapGalleryContainer" data-bind="css: {visible: obIsBasemapGalleryVisible}" >
+      </div>
+
+      <div id="viewDiv"></div>
+    </div>
+  </div>
+
+</body>
+</html>

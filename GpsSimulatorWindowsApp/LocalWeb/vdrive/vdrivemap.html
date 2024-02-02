@@ -1,0 +1,148 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS Maps SDK for JavaScript Tutorials: Add a point, line, and polygon</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
+  <link rel="stylesheet" href="../shared/simple-speedometer/simple-speedometer.css" />
+  <link rel="stylesheet" href="vdrivemap.css" />
+  <script src="../Namespacing.js"></script>
+  <script src="../pubsub.js"></script>
+  <script src="../knockout-min.js"></script>
+  <script src="https://js.arcgis.com/4.28/"></script>
+
+  <script src="keyboardeventmanager.js"></script>
+  <script src="gamepadeventmanager.js"></script>
+
+  <script src="routecalculator.js"></script>
+  <script src="vdrivebrowserproxy.js"></script>
+  <script src="drivingobject.js"></script>
+  <script src="drivinggameengine.js"></script>
+  <script src="vdrivemap.js"></script>
+
+</head>
+<body>
+  <div class="pageRoot">
+    <div class="header">
+      <!-- <button data-bind="click:startVirtualDriving, enable:!obDrivingStarted()">Start</button>
+      <button data-bind="click:stopVirtualDriving, enable: obDrivingStarted()">Stop</button> -->
+      <div>
+        <span id="dbgMessage"></span>
+      </div>
+    </div>
+    <div class="content">
+
+      <div id="viewDiv" data-bind="css:{hidden: obShow3DMapView()}"></div>
+      <div id="view3DDiv" data-bind="css:{hidden: !obShow3DMapView()}"></div>
+      <div id="mainVehicleMarker" class="vehicle-marker" style="display: none;"></div>
+
+      <div class="map-toolbar">
+        <div id="btnToggleBasemapGallery" class="btn-action toggle-basemapgallery"
+          title="Show/Hide Basemap Gallery"
+          data-bind="click:toggleBasemapGallery"></div>
+        <div id="btnToggleInstructionPanel" class="btn-action toggle-instructionpanel"
+          title="Show/Hide Driving Instructions"
+          data-bind="click:toggleInstructionPanelVisibility"></div>
+      </div>
+
+      <div id="basemapGalleryContainer" data-bind="css: {visible: obShowBasemapGallery}" >
+      </div>
+
+      <div id="instructionPanel" class="description-panel" data-bind="visible: obShowInstructionPanel, css: {collapsed: !obInstructionPanelExpanded()}">
+        <div class="instruction-header" data-bind="click: expandCollapseInstructionPanel">
+          <div class="toggle-btn" data-bind="css: {expanded: obInstructionPanelExpanded}">
+
+            <!-- <img src="../res/icon-arrow-up.png" data-bind="visible: obInstructionPanelExpanded()" />
+            <img src="../res/icon-arrow-down.png" data-bind="visible:!obInstructionPanelExpanded()" /> -->
+          </div>
+          <label style="font-size: 1.4em;font-weight: bold;">Virtual Driving Instruction</label>
+        </div>
+        <!-- ko if: obInstructionPanelExpanded -->
+        <div class="description-item">
+          <div>
+            Click <img style="width: 28px;height:28px;" src="../res/start-button-icon.png"/> button to start virtual driving.
+          </div>
+          <div>
+            Use <b>Keyboard(default)</b> or <b>Gamepad(if connected)</b> to control driving <b>direction</b> and <b>speed</b>(acceleration).
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <img style="margin: auto; width: 300px" src="../res/screenshots/vdrive-control-methods.png"/>
+          </div>
+          <div>
+            <b>Keyboard control rules:</b>
+            <ul>
+              <li>Turn <b>LEFT</b> by pressing <b>Left (&lt;-)</b> key; Turn <b>RIGHT</b> by pressing <b>Right (-&gt;) </b> key</li>
+              <li>Press <b>A</b> key to <b>Accelerate</b>; Press <b>B</b> or <b>D</b> key to <b>Decelerate/Brake</b></li>
+              <li>Press <b>CTRL + N</b> key to toggle Map orientation between <b>Always to North</b> or <b>Rotate with Vehicle</b></li>
+            </ul>
+          </div>
+
+          <div>
+            <b>Gamepad(Xbox compatible) control rules:</b>
+            <ul>
+              <li>Use <b>Dpad</b> or <b>Left Thumbstick</b> to turn <b>LEFT</b> or <b>RIGHT</b></li>
+              <li>Push <b>Left Thumbstick Left</b> to turn <b>LEFT</b>; Push <b>Left Thumbstick Right</b> to turn <b>RIGHT</b></li>
+              <li>Press <b>A</b> button to <b>Accelerate</b>; Press <b>B</b> button to <b>Decelerate/Brake</b></li>
+              <li>Push <b>Right Thumbstick Up</b> to <b>Accelerate</b>; Push <b>Right Thumbstick Down</b> to <b>Decelerate/Brake</b></li>
+            </ul>
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <img style="margin: auto; width: 300px;" src="../res/screenshots/gamepad-layout.png" />
+          </div>
+        </div>
+
+        <!-- /ko -->
+      </div>
+
+      <div class="bottom-left">
+        <div class="map-btn toggle-3dview" data-bind="click:toggle3DView">
+          <div class="switch-3dmode-button">
+            <div class="icon-text-area">
+              <div class="icon-3dmode"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-btn map-compass" data-bind="click:toggleMapOrientation" >
+          <div class="re-center-button">
+            <div class="icon-text-area">
+              <div class="orientation" data-bind="style:{transform: 'rotate(' + obOrientation() + 'deg)'}">
+                <div class="click-handler" ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Acceleration Speedometer -->
+      <div class="speedometer-panel" data-bind="visible: obShowSpeedometer">
+        <div class="speedometer">
+          <div class="speedometer-circle vehicle">
+            <!-- ko foreach: obSpeedometerItems -->
+            <i data-bind="css: {selected: $data <= $parent.obSpeedometerSelectedCount() }, style: {'--i': $data - 1}"></i>
+            <!-- /ko -->
+            <p class="speedometer-text" data-bind="text:obSpeedometerDisplayValue"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction Steering Indicator -->
+      <div class="streering-left-indicator blinking" data-bind="visible: obIsTurningLeft">
+        <span>&#x2190;</span>
+      </div>
+      <div class="streering-right-indicator blinking" data-bind="visible: obIsTurningRight">
+        <span>&#x2192;</span>
+      </div>
+
+      <!-- count down -->
+      <div class="count-down-panel" data-bind="visible: obCountDownVisible()">
+        <div class="count-down-text" data-bind="text: obCountDownText()"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

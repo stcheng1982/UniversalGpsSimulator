@@ -1,0 +1,330 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>Icons\tf-uni-gps-simulator.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataType\Config\**" />
+    <Compile Remove="PatrolHistory\**" />
+    <EmbeddedResource Remove="DataType\Config\**" />
+    <EmbeddedResource Remove="PatrolHistory\**" />
+    <None Remove="DataType\Config\**" />
+    <None Remove="PatrolHistory\**" />
+    <Page Remove="DataType\Config\**" />
+    <Page Remove="PatrolHistory\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Icons\GPSDataSource.png" />
+    <None Remove="Icons\GPSSimulationSettings.png" />
+    <None Remove="Icons\ImageNotFound.png" />
+    <None Remove="Icons\LeftTriangle.png" />
+    <None Remove="Icons\LocationArrow.png" />
+    <None Remove="Icons\LogFileIcon.png" />
+    <None Remove="Icons\PauseGpsSimulation.png" />
+    <None Remove="Icons\RightTriangle.png" />
+    <None Remove="Icons\RoutePath.png" />
+    <None Remove="Icons\Settings.png" />
+    <None Remove="Icons\StartGPSSimulation.png" />
+    <None Remove="Icons\StopGPS.png" />
+    <None Remove="Icons\StopGPSSimulation.png" />
+    <None Remove="Icons\StopGPSSimulationGray.png" />
+    <None Remove="Icons\TrayIcon.ico" />
+    <None Remove="Icons\WWW.png" />
+    <None Remove="LocalWeb\DeviceGeolocationService.js" />
+    <None Remove="LocalWeb\favicon.ico" />
+    <None Remove="LocalWeb\index.css" />
+    <None Remove="LocalWeb\index.html" />
+    <None Remove="LocalWeb\index.js" />
+    <None Remove="LocalWeb\knockout-min.js" />
+    <None Remove="LocalWeb\Namespacing.js" />
+    <None Remove="LocalWeb\plusgpsmap.css" />
+    <None Remove="LocalWeb\plusgpsmap.html" />
+    <None Remove="LocalWeb\plusgpsmap.js" />
+    <None Remove="LocalWeb\pubsub.js" />
+    <None Remove="LocalWeb\res\audio\car-accelerate-sound.mp3" />
+    <None Remove="LocalWeb\res\audio\mixkit-simple-countdown-3secs.mp3" />
+    <None Remove="LocalWeb\res\audio\steering-sound-effect.mp3" />
+    <None Remove="LocalWeb\res\icon-add-new.png" />
+    <None Remove="LocalWeb\res\icon-arrow-down.png" />
+    <None Remove="LocalWeb\res\icon-arrow-north.png" />
+    <None Remove="LocalWeb\res\icon-arrow-up.png" />
+    <None Remove="LocalWeb\res\icon-basemap-gallery.png" />
+    <None Remove="LocalWeb\res\icon-car-black-2d.png" />
+    <None Remove="LocalWeb\res\icon-copy-info.png" />
+    <None Remove="LocalWeb\res\icon-delete-item.png" />
+    <None Remove="LocalWeb\res\icon-edit-item.png" />
+    <None Remove="LocalWeb\res\icon-focus.png" />
+    <None Remove="LocalWeb\res\icon-instructions.png" />
+    <None Remove="LocalWeb\res\icon-location-point.png" />
+    <None Remove="LocalWeb\res\icon-multi-points-focus.png" />
+    <None Remove="LocalWeb\res\icon-route-info.png" />
+    <None Remove="LocalWeb\res\icon-zoom-to-extent.png" />
+    <None Remove="LocalWeb\res\loading-spinner.gif" />
+    <None Remove="LocalWeb\res\map-3d-mode.png" />
+    <None Remove="LocalWeb\res\map-orientation.svg" />
+    <None Remove="LocalWeb\res\screenshots\gamepad-layout.png" />
+    <None Remove="LocalWeb\res\screenshots\vdrive-control-methods.png" />
+    <None Remove="LocalWeb\res\start-button-icon.png" />
+    <None Remove="LocalWeb\shared\simple-speedometer\simple-speedometer.css" />
+    <None Remove="LocalWeb\vdrive\drivinggameengine.js" />
+    <None Remove="LocalWeb\vdrive\drivingobject.js" />
+    <None Remove="LocalWeb\vdrive\gamepadeventmanager.js" />
+    <None Remove="LocalWeb\vdrive\keyboardeventmanager.js" />
+    <None Remove="LocalWeb\vdrive\routecalculator.js" />
+    <None Remove="LocalWeb\vdrive\routeeditor.css" />
+    <None Remove="LocalWeb\vdrive\routeeditor.html" />
+    <None Remove="LocalWeb\vdrive\routeeditor.js" />
+    <None Remove="LocalWeb\vdrive\routeeditorbrowserproxy.js" />
+    <None Remove="LocalWeb\vdrive\vdrivebrowserproxy.js" />
+    <None Remove="LocalWeb\vdrive\vdrivemap.css" />
+    <None Remove="LocalWeb\vdrive\vdrivemap.html" />
+    <None Remove="LocalWeb\vdrive\vdrivemap.js" />
+    <None Remove="LocalWeb\WindowsHostDeviceProxy.js" />
+    <None Remove="SplashscreenImage.png" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="CsvHelper" Version="30.0.1" />
+		<PackageReference Include="DeviceId.Windows.Wmi" Version="6.2.1" />
+		<PackageReference Include="FluentAssertions" Version="6.10.0" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1587.40" />
+		<PackageReference Include="Serilog" Version="3.1.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
+		<PackageReference Include="SharpDX.XInput" Version="4.2.0" />
+		<PackageReference Include="SharpGIS.NmeaParser" Version="2.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Icons\GPSDataSource.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\GPSSimulationSettings.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\ImageNotFound.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\LeftTriangle.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\LocationArrow.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\LogFileIcon.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\PauseGpsSimulation.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\RightTriangle.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\RoutePath.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\Settings.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\StartGPSSimulation.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\StopGPS.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\StopGPSSimulation.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\StopGPSSimulationGray.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Content Include="LocalWeb\knockout-min.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\plusgpsmap.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\plusgpsmap.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\plusgpsmap.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\audio\car-accelerate-sound.mp3">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\audio\mixkit-simple-countdown-3secs.mp3">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\audio\steering-sound-effect.mp3">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-add-new.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-arrow-down.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-arrow-north.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-arrow-up.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-basemap-gallery.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-car-black-2d.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-copy-info.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-delete-item.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-edit-item.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-instructions.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-location-point.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-multi-points-focus.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-route-info.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-zoom-to-extent.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\loading-spinner.gif">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\map-3d-mode.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\map-orientation.svg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\screenshots\gamepad-layout.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\screenshots\vdrive-control-methods.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\start-button-icon.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\shared\simple-speedometer\simple-speedometer.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\drivinggameengine.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\drivingobject.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\gamepadeventmanager.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\keyboardeventmanager.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\routecalculator.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\routeeditor.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\routeeditor.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\routeeditor.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\routeeditorbrowserproxy.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\vdrivebrowserproxy.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\vdrivemap.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\vdrivemap.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\vdrive\vdrivemap.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Resource Include="Icons\tf-uni-gps-simulator.ico" />
+	  <Content Include="LocalWeb\favicon.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\index.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\index.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\index.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\Namespacing.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\pubsub.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\res\icon-focus.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="LocalWeb\WindowsHostDeviceProxy.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="TrayIcon.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <ProjectReference Include="..\GpsSimulatorComponentLibrary\GpsSimulatorComponentLibrary.csproj" />
+	  <Resource Include="Icons\WWW.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="SplashscreenImage.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="LocalWeb\.editorconfig">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Data\" />
+	  <Folder Include="ExtTools\" />
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+</Project>

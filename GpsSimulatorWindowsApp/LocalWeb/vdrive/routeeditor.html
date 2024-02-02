@@ -1,0 +1,97 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Route Editor</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
+    <link rel="stylesheet" href="routeeditor.css" />
+
+    <script src="../knockout-min.js"></script>
+    <script src="https://js.arcgis.com/4.28/"></script>
+
+    <script src="routecalculator.js"></script>
+    <script src="routeeditorbrowserproxy.js"></script>
+    <script src="routeeditor.js"></script>
+  </head>
+  <body>
+    <div id="loadingSpinner" data-bind="visible:obShowLoadingIndicator">
+      <div class="content"></div>
+    </div>
+    <div id="viewDiv" data-bind="css: {editing: obIsAddingStops() || obIsEditingStop()}"></div>
+    <div class="map-toolbar">
+      <div id="btnToggleBasemapGallery" class="btn-action toggle-basemapgallery"
+        title="Show/Hide Basemap Gallery"
+        data-bind="click:toggleBasemapGallery"></div>
+      <div id="btnToggleRouteInfoPanel" class="btn-action toggle-routeinfopanel"
+        title="Show/Hide Route Information Panel"
+        data-bind="click:toggleRouteInfoPanelVisibility"></div>
+    </div>
+
+    <div id="basemapGalleryContainer" data-bind="css: {visible: obIsBasemapGalleryVisible}" >
+    </div>
+
+    <div id="routeInfoPanel"  style="display: none;" data-bind="style: {display: !obShowRouteInfoPanel() ? 'none': 'flex'}">
+      <div class="route-header" data-bind="click: toggleRouteInfoPanelExpand">
+        <div class="route-name" data-bind="text: obCurrentRouteName">
+        </div>
+        <div class="toggle-btn" data-bind="css: {expanded: obRoutePanelExpanded}">
+        </div>
+      </div>
+      <div class="route-body" data-bind="visible:obRoutePanelExpanded">
+        <div class="route-summary">
+          <!-- ko if: obCurrentRouteStops().length >= 2 -->
+          <b>Distance: <span data-bind="text:obRoutePointDistanceFromStart"></span></b>&nbsp;/&nbsp;
+          <b><span data-bind="text:obCurrentRouteTotalMeters().toFixed(1)"></span></b> meters&nbsp;&nbsp;
+          <b>Heading: </b><span data-bind="text:obRoutePointHeading().toFixed(0)"></span><b>°</b>&nbsp;
+
+          <div class="route-slider">
+            <input id="currentRouteSlider" type="range" min="0"
+            data-bind="value:obRoutePointDistanceFromStart, attr: {max: obCurrentRouteTotalMeters()}, event: {change: routePointDistanceChanged}" />
+          </div>
+          <!-- /ko -->
+        </div>
+        <div class="route-stops">
+          <div class="route-stops-header">
+            <div class="route-stops-header-title">
+              <span data-bind="text:obCurrentRouteStops().length"></span> <span data-bind="text:obCurrentRouteStops().length > 1 ? 'stops' : 'stop'"></span>
+            </div>
+            <div class="action-btn zoom-to-btn clickable" data-bind="click: zoomToRouteAreaClicked" title="Zoom to Route Stops"></div>
+            <div class="action-btn add-new-btn clickable" data-bind="css: {active: obIsAddingStops()}, click: addStopsButtonClicked"
+            title="Add New Stop">
+            </div>
+          </div>
+          <!-- ko if: obCurrentRouteStops().length > 0-->
+          <div class="route-stops-list">
+
+            <!-- ko foreach: obCurrentRouteStops -->
+            <div class="route-stops-list-item">
+              <div class="stop-info" data-bind="event: { mouseover: $parent.stopItemMouseOver, mouseout: $parent.stopItemMouseOut }">
+                <div class="stop-info-header">
+                  <div class="stop-symbol"></div>
+                  <div class="location">
+                    (<span class="stop-longitude" data-bind="text: longitude.toFixed(6)"></span>,&nbsp;
+                    <span class="stop-latitude" data-bind="text: latitude.toFixed(6)"></span>)
+                  </div>
+
+                </div>
+                <div class="stop-info-body" data-bind="attr: {title:address}">
+                  <div class="stop-address" data-bind="text: address"></div>
+                </div>
+              </div>
+              <div class="actions">
+                <div class="action-btn copy clickable" data-bind="click: $parent.copyStopInfoButtonClicked" title="Copy Stop Information"></div>
+                <div class="action-btn edit clickable" data-bind="css: {active: $parent.obIsEditingStop() && $parent.obEditingStopItem() === $data}, click: $parent.editStopButtonClicked" title="Modify Stop Location"></div>
+                <div class="action-btn delete clickable" data-bind="click: $parent.removeStopButtonClicked" title="Delete Stop"></div>
+              </div>
+            </div>
+            <!-- /ko -->
+
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

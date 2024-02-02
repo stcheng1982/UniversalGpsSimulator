@@ -1,0 +1,58 @@
+﻿<Window x:Class="GpsSimulatorWindowsApp.Dialogs.AutoDrivingGpsEventsGenerationSettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GpsSimulatorWindowsApp.Dialogs"
+        mc:Ignorable="d"
+		WindowStartupLocation="CenterScreen"
+		ResizeMode="NoResize"
+        Title="Auto Driving GpsEvents Generation Settings" Height="260" Width="300"
+		Background="AliceBlue">
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0" Orientation="Vertical" Margin="3 3 3 3">
+			<StackPanel Orientation="Horizontal" >
+				<Label Content="Acceleration (m/s^2):" Width="180" Margin="3 3 3 3" Padding="3 3 3 3" FontWeight="Bold" />
+				<TextBox Width="80" Margin="3 3 3 3" Padding="3 3 3 3" InputScope="Number" Text="{Binding Path=Acceleration}"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" >
+				<Label Content="Deceleration (m/s^2):" Width="180" Margin="3 3 3 3" Padding="3 3 3 3" FontWeight="Bold" />
+				<TextBox Width="80" Margin="3 3 3 3" Padding="3 3 3 3" InputScope="Number" Text="{Binding Path=Deceleration}"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" >
+				<Label Content="Max Speed (m/s):" Width="180" Margin="3 3 3 3" Padding="3 3 3 3" FontWeight="Bold" />
+				<TextBox Width="80" Margin="3 3 3 3" Padding="3 3 3 3" InputScope="Number" Text="{Binding Path=MaxSpeed}"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" >
+				<Label Content="Turning Speed (m/s):" Width="180" Margin="3 3 3 3" Padding="3 3 3 3" FontWeight="Bold" />
+				<TextBox Width="80" Margin="3 3 3 3" Padding="3 3 3 3" InputScope="Number" Text="{Binding Path=TurnSpeed}"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" >
+				<Label Content="Max Angle Change in Line (°):" Width="180" Margin="3 3 3 3" Padding="3 3 3 3" FontWeight="Bold" />
+				<TextBox Width="80" Margin="3 3 3 3" Padding="3 3 3 3" InputScope="Number" Text="{Binding Path=MaxAngleChangeInSegment}"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" >
+				<Label Content="GPS Events Interval (second):" Width="180" Margin="3 3 3 3" Padding="3 3 3 3" FontWeight="Bold" />
+				<TextBox Width="80" Margin="3 3 3 3" Padding="3 3 3 3" InputScope="Number" Text="{Binding Path=GpsEventsIntervalInSeconds}"/>
+			</StackPanel>
+		</StackPanel>
+
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Grid.Column="1" Width="80" Content="OK" Margin="3 3 3 3" Padding="3 3 3 3" 
+				FontWeight="Bold" Command="{Binding Path=ApplyParametersCommand}" />
+			<Button Grid.Column="2" Width="80" Content="Cancel" Margin="3 3 3 3" Padding="3 3 3 3"
+				FontWeight="Bold" Command="{Binding Path=CancelParametersCommand}" />
+		</Grid>
+    </Grid>
+</Window>

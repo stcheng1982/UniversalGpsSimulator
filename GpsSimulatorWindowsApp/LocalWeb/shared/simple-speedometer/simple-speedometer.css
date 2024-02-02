@@ -1,0 +1,102 @@
+:root {
+  --tlt-br-cnt: 50;
+  --i: 0;
+}
+
+
+.speedometer-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+.speedometer-circle i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: rotate(calc(45deg + calc(calc(360deg / var(--tlt-br-cnt)) * var(--i))));
+}
+
+.speedometer-circle i::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: hsla(0, 0%,100%, 12%);;
+  width: 5px;
+  height: 20px;
+  border-radius: 999rem;
+  transform: rotate(-45deg);
+  transform-origin: top;
+  opacity: 0;
+
+  animation: barCreationAnimation 100ms ease forwards;
+  animation-delay: calc(var(--i) * 15ms);
+}
+
+.speedometer-circle .selected::after {
+  background: rgba(0, 0, 0, 1);
+  /* box-shadow: 0 0 1px hsl(130, 100%, 50%),
+              0 0 3px hsl(130, 100%, 30%),
+              0 0 4px hsl(130, 100%, 10%); */
+}
+
+.percent-text {
+  font-size: 3rem;
+  animation: barCreationAnimation 500ms ease forwards;
+  animation-delay: calc(var(--tlt-br-cnt) * 15ms / 2);
+}
+
+/* .text1{
+  color: hsl(130, 100%, 50%);
+  text-shadow: 0 0 1px hsl(130, 100%, 50%),
+                  0 0 3px hsl(130, 100%, 30%),
+                  0 0 4px hsl(130, 100%, 10%);
+  opacity: 0;
+} */
+
+@keyframes barCreationAnimation {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

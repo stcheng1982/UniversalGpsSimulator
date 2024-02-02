@@ -1,0 +1,93 @@
+﻿<Window x:Class="GpsSimulatorWindowsApp.Dialogs.ModifyHttpRequestOptionsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GpsSimulatorWindowsApp.Dialogs"
+        mc:Ignorable="d"
+        Title="Web Resource Request Options" Height="600" Width="800"
+		Background="AliceBlue" 
+		>
+	<Grid Background="AliceBlue" >
+		<Grid.RowDefinitions>
+			<RowDefinition Height="32"></RowDefinition>
+			<RowDefinition Height="26"></RowDefinition>
+			<RowDefinition Height="100"></RowDefinition>
+			<RowDefinition Height="26"></RowDefinition>
+			<RowDefinition Height="140"></RowDefinition>
+			<RowDefinition Height="160*"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="34"></RowDefinition>
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+			<TextBlock Text="Request Method: " VerticalAlignment="Center" Margin="5 0 0 0"
+					   FontWeight="Bold" ></TextBlock>
+			<ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+					  Width="80" Margin="5 2 2 0" 
+				DisplayMemberPath="Method"
+				ItemsSource="{Binding Path=AllowedRequestMethods}" SelectedItem="{Binding Path=SelectedRequestMethod}"></ComboBox>
+		</StackPanel>
+		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+			<TextBlock Text="Request Headers (JSON Dictionary)" VerticalAlignment="Center" Margin="5 0 0 0"
+					   FontWeight="Bold" ></TextBlock>
+		</StackPanel>
+		<Grid Grid.Row="2" HorizontalAlignment="Stretch" >
+			<TextBox Text="{Binding Path=RequestHeadersValue, Mode=TwoWay}" 
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"
+					AcceptsReturn="True" TextWrapping="Wrap" FontSize="9"
+					VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></TextBox>
+		</Grid>
+		<StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+			<TextBlock Text="Request Body (JSON)" VerticalAlignment="Center" Margin="5 0 0 0"
+					   FontWeight="Bold" ></TextBlock>
+		</StackPanel>
+		<Grid Grid.Row="4" HorizontalAlignment="Stretch" >
+			<TextBox Text="{Binding Path=RequestBodyValue, Mode=TwoWay}" 
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"
+					AcceptsReturn="True" TextWrapping="Wrap" FontSize="9"
+					IsEnabled="{Binding Path=IsRequestBodyEnabled}"
+					VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ></TextBox>
+		</Grid>
+		<Expander Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsExpanded="True">
+			<Expander.Header>
+				<TextBlock Text="Gps Events Json Query Settings" FontWeight="Bold"></TextBlock>
+			</Expander.Header>
+			<StackPanel Orientation="Vertical" Margin="19 0 0 0" >
+				<StackPanel Orientation="Horizontal" Margin="5 3 0 3" >
+					<TextBlock Text="Event List Json Path: " Width="200" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+					<TextBox Width="150" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=EventListJsonPath}" Padding="2"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5 3 0 3" >
+					<TextBlock Text="Event Longitude Property Name: " Width="200" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+					<TextBox Width="150" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=EventLongitudePropertyName}" Padding="2"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5 3 0 3" >
+					<TextBlock Text="Event Latitude Property Name: " Width="200" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+					<TextBox Width="150" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=EventLatitudePropertyName}" Padding="2"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5 3 0 3" >
+					<TextBlock Text="Event Speed Property Name: " Width="200" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+					<TextBox Width="150" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=EventSpeedPropertyName}" Padding="2"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5 3 0 3" >
+					<TextBlock Text="Event Heading Property Name: " Width="200" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+					<TextBox Width="150" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=EventHeadingPropertyName}" Padding="2"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5 3 0 3" >
+					<TextBlock Text="Event StartTime Property Name: " Width="200" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+					<TextBox Width="150" TextAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=EventStartTimePropertyName}" Padding="2"></TextBox>
+				</StackPanel>
+			</StackPanel>
+		</Expander>
+		
+		
+		
+		<StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right" >
+			<Button Content="Apply" Width="80" Margin="5" Height="24" FontWeight="Bold"
+					Command="{Binding Path=ApplyRequestOptionsChangeCommand}"></Button>
+			<Button Content="Cancel" Width="80" Margin="5" Height="24" FontWeight="Bold"
+					Command="{Binding Path=CancelRequestOptionsChangeCommand}"></Button>
+		</StackPanel>
+    </Grid>
+</Window>

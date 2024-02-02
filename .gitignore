@@ -1,0 +1,34 @@
+# Windows Generated Files
+ehthumbs.db
+Thumbs.db
+
+# Visual Studio Paths and Files
+packages/
+bin/
+obj/
+*.suo
+*.csproj.user
+.nuget/
+StyleCop.Cache
+.vs/
+.idea
+
+# Project Specific Files
+/RoutefinderApi/Routefinder.config
+/RoutefinderApi/TFRoute.config
+/RoutefinderApi/Web.config
+node_modules
+/RoutefinderApi/local
+/RoutefinderApi/publish
+/Logs/
+/.vs/RoutefinderApi/v15/Server/sqlite3/db.lock
+/.vs/RoutefinderApi/v15/Server/sqlite3/storage.ide
+/.vs/RoutefinderApi/v15/Server/sqlite3/storage.ide-wal
+/.vs/RoutefinderApi/v15/Server/sqlite3/storage.ide-shm
+/RoutefinderApi/RoutefinderEF.config
+/.vs/RoutefinderApi/DesignTimeBuild/.dtbcache
+/.vs/RoutefinderApi/config/applicationhost.config
+/.vs/RoutefinderApi/v16/Server/sqlite3/db.lock
+/.vs/RoutefinderApi/v16/Server/sqlite3/storage.ide
+/.vs/RoutefinderApi/v16/Server/sqlite3/storage.ide-shm
+/.vs/RoutefinderApi/v16/Server/sqlite3/storage.ide-wal
